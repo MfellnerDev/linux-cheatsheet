@@ -51,3 +51,15 @@ main fielsystem, auf der main partition oder auf dem main laufwerk sind.
 
 **df (-h)**: Gibt einen report zur disk usage des Filesystems aus. Mit -h werden alle Werte in ihre jeweiligen Einheiten
 angegeben (1000er), z.B. 1.1G  
+
+**CTRL-D**: Diese Tastenkombination stopppt ein momentan laufendes Programm.
+
+**CTRL+C**: Diese Tastenkombination schließt ein momentan laufendes Programm.
+
+**cp -r**: Kopiert ein Verzeichnis mit der Option rekursiv
+
+**cp -u**: Steht für update und kopiert das Verzeichnis nur dann, wenn der Inhalt des source directories neuer als der des destination drectories ist.
+
+**grep**: Holt sich eine ressource und gibt sie, falls sie dem übergebenen Muster entspricht, aus.
+
+
