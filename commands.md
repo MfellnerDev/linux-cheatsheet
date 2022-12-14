@@ -33,6 +33,7 @@ Zeilen in Files einfügen, usw.
 
 **cd -**: Kehrt zum home-verzeichnis zurück 
 
+**!!**: Führt letzten ausgeführten Befehl aus (also der letzte in der history)
 **tree**: Gibt den filesystem-tree aus. Also die Filestruktur des systems (tree -d = nur directories)
 
 **ln file1 file2**: Erstelle einen harten link, also symbolische Links genannt. Das eine file führt also zum anderen
