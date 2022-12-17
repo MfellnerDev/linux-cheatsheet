@@ -77,6 +77,7 @@ angegeben (1000er), z.B. 1.1G
 
 **ssh-keygen -t ed25519 -C "[EMAIL]"**: Erzeugt einen SSH-Key mit dem ED25519 Algorithmus und weist diesem SSH-Key die EMAIL zu (EMAIL ist im dem Fall ein Kommentar, dient aber trotzdem zur Zuweisung).
 
+**eval [argument...]**: Dieses Hilfsprogramm "baut" Befehle (übergebenen Argumente). Der konstruierte Befehl wird von der Shell gelesen und konstruiert.
 
 **inxi**: Command Line system information script, zeigt Informationen zu dem System an.
 
