@@ -57,6 +57,12 @@ angegeben (1000er), z.B. 1.1G
 
 **CTRL+C**: Diese Tastenkombination schließt ein momentan laufendes Programm.
 
+**jobs**: Zeigt die momentan gesnoozden befehle an (gestoppten Befehle)
+
+**fg [numer]**: Resumed einen befehl, der vorher mit CTRL+Z gestoppt wurde.
+
+**history**: Zeigt die zsh_history / bash_history an.
+
 **cp -r**: Kopiert ein Verzeichnis mit der Option rekursiv
 
 **cp -u**: Steht für update und kopiert das Verzeichnis nur dann, wenn der Inhalt des source directories neuer als der des destination drectories ist.
