@@ -63,4 +63,17 @@ angegeben (1000er), z.B. 1.1G
 
 **grep**: Holt sich eine ressource und gibt sie, falls sie dem übergebenen Muster entspricht, aus.
 
+**pacman**: Package manager Arch-based distros, z.B.: package installieren = "sudo pacman -S [pkg-name]"
 
+**lspci**: Zeigt alle momentanen Devices an, die am PCI des hosts angeschlossen sind. Inklusive Treiber-Informationen.
+
+**inxi**: Command Line system information script, zeigt Informationen zu dem System an.
+---
+**inxi -B**: Zeigt batterie-Daten an (charge, conditiu, extra informations)
+
+**inxi -A**: Zeigt Informationen zum Audio-System an
+
+**inxi -C**: Zeigt Informationen zu der CPU an. (also Kerne, Name, AMCP, AMP, MT, ...)
+
+**inxi -N**: Zeigt Informationen zu den existenten Netzwerk-Geräten an (inklusive Treiber-Infos, unter Linux ganz wichtig)
+---
