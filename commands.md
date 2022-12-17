@@ -65,6 +65,8 @@ angegeben (1000er), z.B. 1.1G
 
 **pacman**: Package manager Arch-based distros, z.B.: package installieren = "sudo pacman -S [pkg-name]"
 
+**yay**: AUR-Helper, Packet-Manager für das Arch AUR. Funktioniert grundlegend mit den Befehlen von *pacman*.
+
 **lspci**: Zeigt alle momentanen Devices an, die am PCI des hosts angeschlossen sind. Inklusive Treiber-Informationen.
 
 **inxi**: Command Line system information script, zeigt Informationen zu dem System an.
