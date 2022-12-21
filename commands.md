@@ -79,6 +79,10 @@ angegeben (1000er), z.B. 1.1G
 
 **eval [argument...]**: Dieses Hilfsprogramm "baut" Befehle (übergebenen Argumente). Der konstruierte Befehl wird von der Shell gelesen und konstruiert.
 
+**mount**: Mountet ein File System
+
+**mount -l**: Alle eingehängten logischen sowie physikalischen Filesysteme werden aufgelistet
+
 **inxi**: Command Line system information script, zeigt Informationen zu dem System an.
 
 ---
