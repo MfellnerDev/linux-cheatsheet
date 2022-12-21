@@ -31,6 +31,10 @@ Zeilen in Files einfügen, usw.
 
 **pwd**: Gibt das momentante Directory aus  
 
+**echo $PWD**: Gibt das aktuelle working directory aus (greift auf die env variable zu)
+
+**printenv | grep PWD**: Holt sich alle env variablen und gibt das PWD aus.
+
 **cd -**: Kehrt zum home-verzeichnis zurück 
 
 **!!**: Führt letzten ausgeführten Befehl aus (also der letzte in der history)
