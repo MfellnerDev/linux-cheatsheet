@@ -87,6 +87,10 @@ angegeben (1000er), z.B. 1.1G
 
 **mount -l**: Alle eingehängten logischen sowie physikalischen Filesysteme werden aufgelistet
 
+**stat**: Zeigt statistiken über ein file oder filesystem an
+
+**file**: Zeigt die Fileextension der jeweiligen Datei an
+
 **inxi**: Command Line system information script, zeigt Informationen zu dem System an.
 
 ---
