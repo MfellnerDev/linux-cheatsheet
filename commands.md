@@ -91,6 +91,8 @@ angegeben (1000er), z.B. 1.1G
 
 **file**: Zeigt die Fileextension der jeweiligen Datei an
 
+**unalias [alias]**: Löscht den angegebenen Alias
+
 **inxi**: Command Line system information script, zeigt Informationen zu dem System an.
 
 ---
