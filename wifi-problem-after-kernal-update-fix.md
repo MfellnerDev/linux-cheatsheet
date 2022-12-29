@@ -68,8 +68,7 @@ rtw89_8852be 0000:03:00.0: chip rfe_type is 1
 
 It works now. I am scared but my nerves would explode.
 
-**! This command uses the --force-vermagic option. You should NEVER force something. If you have to force somethin, it means that there is another way
-** to do it. There has to be
+**! This command uses the --force-vermagic option. You should NEVER force something. If you have to force somethin, it means that there is another way to do it. There has to be**
 
 ---
 
