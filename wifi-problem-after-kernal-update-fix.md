@@ -48,6 +48,8 @@ The system detected a **version magic**, this means, that the modules are still 
 
 ### Solution description
 
+**! Note: This solution taints your Kernel. Using a tainted Kernel is not a big problem (as a "normal" Linux user). But it is still not the best solution to force load a Kernel module. You can read more about tainted Kernels here: [Tainted Kernels | docs.Kernel.org](https://docs.kernel.org/admin-guide/tainted-kernels.html)**
+
 After all, the solution is simple but not really recommendable. I searched my entire system for the old kernel (or usages) with `sudo pacman -Q | grep linux`
 and `uname -r` but they all showed only the latest kernel version.
 
@@ -66,7 +68,7 @@ rtw89_8852be 0000:03:00.0: Firmware version 0.27.32.1, cmd version 0, type 3
 rtw89_8852be 0000:03:00.0: chip rfe_type is 1
 ```
 
-It works now. I am scared but my nerves would explode.
+It works now. I am scared but my nerves are near doom.
 
 **! This command uses the --force-vermagic option. You should NEVER force something. If you have to force somethin, it means that there is another way to do it. There has to be**
 
