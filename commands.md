@@ -119,6 +119,8 @@ angegeben (1000er), z.B. 1.1G
 
 **[MIN] [HOUR] [Day of Month] [MON] [Day of Week] [Command]**: Der Syntax für einen cronjob im cron table.
 
+**sleep NUMBER[Suffix]**: Suspendiert einen Befehl und verzögert die weitere Ausführung um NUMBER.
+
 **inxi**: Command Line system information script, zeigt Informationen zu dem System an.
 
 ---
