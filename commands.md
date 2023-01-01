@@ -93,6 +93,32 @@ angegeben (1000er), z.B. 1.1G
 
 **unalias [alias]**: Löscht den angegebenen Alias
 
+**kill -9 [PID] / kill -SIGKILL [PID]**: Tötet den Prozess mit der jeweiligen PID sofort.
+
+**[BEFEHL]&**: Der &-Operator steckt einen Befehl in den Hintergrund.
+
+**jobs -l**: Zeigt alle momentanen Hintergrundjobs und deren PID an.
+
+**ps -ef**: Zeigt Informationen über alle momentanen Prozesse im System an
+
+**ps -eLf**: Zeigt Informationen über alle momentanen Prozesse inklusive allen Threads im System an.
+
+**ps -ef | grep [Prozessname]**: Damit kann man sich schnell Informationen zu einem momentan laufenden Prozess holen.
+
+**ps aux**: Zeigt alle momentan laufenden Prozesse im System an
+
+**ps aux | grep [Prozessname]**: Damit kann man sich schnell Informationen zu einem momentan laufenden Prozess holen.
+
+**pstree**: Zeigt den aktuellen Prozessbaum an. Damit die Prozesshierachie und Informationen zu den Threads.
+
+**top**: Mutter von **htop**, wird alle 2 Sekunden aktualisiert.
+
+**at [Zeitraum]**: Damit kann man einen Befehl in der Zukunft planen. Z.b. **at now + 2 days**. Daraufhin folgt die Eingabe der auszuführenden Befehle.
+
+**crontab -e**: Öffnet den editor für den lokalen cron table. Damit lassen sich cronjobs planen.
+
+**[MIN] [HOUR] [Day of Month] [MON] [Day of Week] [Command]**: Der Syntax für einen cronjob im cron table.
+
 **inxi**: Command Line system information script, zeigt Informationen zu dem System an.
 
 ---
