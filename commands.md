@@ -161,6 +161,8 @@ Es ist auch möglich, folgendermaßen NFS einzuhängen: **sudo mount servername:
 
 **zip**: Komprimieren/De-Komprimieren von Dateien. Wird nicht oft verwendet, ist ein legacy Programm, wird für z.B. .zip Dateien von einem Windows System benötigt.
 
+---
+
 **tar xvf mydir.tar**: Extrahiert alle Dateien in mydir.tar in das mydir Verzeichnis.
   
 **tar zcvf mydir.tar.gz mydir**: Erstelle ein Archiv und komprimiere es mit **gzip**
@@ -170,5 +172,7 @@ Es ist auch möglich, folgendermaßen NFS einzuhängen: **sudo mount servername:
 **tar Jcvf mydir.tar.xz mydir**: Erstelle ein Archiv und komprimiere es mit **xz**
   
 **tar xvf mydir.tar.gz**: Extrahiere alle Dateien von mydir.tar.gz in mydir.
+
+---
 
 **dd**: Disk-to-Disk-Copying. Man kann damit raw disk space kopieren. **Vorsicht! Kann Festplatten zerstören!** Z.b.: **dd if=/dev/sda of=/dev/sdb**. Überschreibt und löscht dabei alles, was sich auf der zweiten Festplatte befunden hat.
