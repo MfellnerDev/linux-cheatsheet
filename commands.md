@@ -89,7 +89,7 @@ angegeben (1000er), z.B. 1.1G
 
 **stat**: Zeigt statistiken über ein file oder filesystem an
 
-**file**: Zeigt die Fileextension der jeweiligen Datei an
+**file**: Zeigt die Fileextension/Fileart der jeweiligen Datei an. Z.b.: **file * **
 
 **unalias [alias]**: Löscht den angegebenen Alias
 
@@ -134,3 +134,41 @@ angegeben (1000er), z.B. 1.1G
 **inxi -N**: Zeigt Informationen zu den existenten Netzwerk-Geräten an (inklusive Treiber-Infos, unter Linux ganz wichtig)
 
 ---
+
+**mount [device node, UUID, ...] [mounting point]**: Hängt/Mounted ein Filesystem an einen gewissen Mounting Point. Z.b.: **sudo mount /dev/sda5 /home**
+
+Es ist auch möglich, folgendermaßen NFS einzuhängen: **sudo mount servername:/ordner /mounting/point**
+
+**mount**: Zeigt alle kürzlich eingehängten Filesysteme an
+
+**umount**: Hängt ein Filesystem wieder aus (unmounted es). Z.b.: **sudo umount /home**
+
+**diff**: Zeigt den Unterschied zwischen zwei files an. Z.b.: **diff -c file1 file2**
+
+**diff3**: Zeigt den Unterschied zwischen drei files an. Das mittlere wird dabei als "common file" (basis) verwendet. Z.b.: **diff3 MY-FILE COMMON-FILE YOUR-FILE**
+
+**diff -Nur originalfile newfile > patchfile**: Erstellt ein Patchfile, welches den Unterschied zwischen originalfile und newfile enthält
+
+**patch originalfile patchfile**: Man überträgt einen Patch (von einem z.B. neueren File) in ein anderes File ein. Die Unterschiede der Files werden quasi gepatched.
+
+**rsync**: Programm mit welchem man sein System Backupen kann. Man kann damit Daten auf einen anderen Rechner übertragen (im Gegensatz zu **cp**). Z.b.: **rsync -r projektX archive-machine:archive/projektX**
+
+**gzip**: Komprimieren/De-Komprimieren von Dateien.
+
+**xz**: Kompieren/De-Komprimieren von Dateien. Effizienter als gzip/bzip2/zip. Wird im Linux Kernel verwendet.
+
+**bzip2**: Kompieren/De-Komprimieren von Dateien. Gleiche Verwendung wie bei **gzip**.
+
+**zip**: Komprimieren/De-Komprimieren von Dateien. Wird nicht oft verwendet, ist ein legacy Programm, wird für z.B. .zip Dateien von einem Windows System benötigt.
+
+**tar xvf mydir.tar**: Extrahiert alle Dateien in mydir.tar in das mydir Verzeichnis.
+  
+**tar zcvf mydir.tar.gz mydir**: Erstelle ein Archiv und komprimiere es mit **gzip**
+  
+**tar jcvf mydir.tar.bz2 mydir**: Erstelle ein Archiv und komprimiere es mit **bz2**
+  
+**tar Jcvf mydir.tar.xz mydir**: Erstelle ein Archiv und komprimiere es mit **xz**
+  
+**tar xvf mydir.tar.gz**: Extrahiere alle Dateien von mydir.tar.gz in mydir.
+
+**dd**: Disk-to-Disk-Copying. Man kann damit raw disk space kopieren. **Vorsicht! Kann Festplatten zerstören!** Z.b.: **dd if=/dev/sda of=/dev/sdb**. Überschreibt und löscht dabei alles, was sich auf der zweiten Festplatte befunden hat.
