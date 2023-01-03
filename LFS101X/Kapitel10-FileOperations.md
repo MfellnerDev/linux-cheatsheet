@@ -129,9 +129,7 @@ tmpfs          tmpfs     7,3G  4,4M  7,3G   1% /tmp
 tmpfs          tmpfs     1,5G  100K  1,5G   1% /run/user/1000
 ```
 
-
-
-## 1.5 NFS und Network Filesystems
+## 1.5 NFS und Network Filesysteme
 
 Oft ist es nötig, Dateien von einem physikalischen System zu einem anderen zu transferieren. Diese können lokal im gleichen Netz oder irgendwo verstreut im Internet sein. Ein `network (distributed) filesystem` kann alle seine Daten auf einer Maschine oder auf mehreren Maschinen haben. 
 
@@ -139,13 +137,9 @@ Man kann sich ein Netzwerkfilesystem einfach nur als eine Gruppierung von low le
 
 ![The client-server architecture of NFS](https://courses.edx.org/assets/courseware/v1/b29a567ddecc954ea6440a9e4dedd067/asset-v1:LinuxFoundationX+LFS101x+1T2020+type@asset+block/nfs.png)
 
-
-
 > Viele Systemadministratoren mounten remote users' home directories auf einem Server um ihnen Zugriff zu den selben Files und Konfigurationen über mehrere Systemen verteilt zu geben. Dieses Vorgehen erlaubt dem Benutzer, dass er auf Daten eines anderen Rechners zugreift, während er sich immer noch auf der eigenen Maschine befindet.
 
 Der Name für dieses Filesystem ist **NFS** (**N**etwork **F**ilesystem). Es hat eine längere Geschichte und wurde von Sun Microsystems entwickelt. Eine andere, häufig verwendete Implementation ist **CIFS** (auch **SAMBA** genannt) welches ursprünglich von Microsoft stammt.
-
-
 
 ### 1.5.1 NFS auf einem Server
 
@@ -167,8 +161,6 @@ Dieser Eintrag erlaubt es Hosts in der `example.com` domain, das `/projekte` dir
 
 Nachdem man das `/etc/exports` File bearbeitet hat, kann man mit dem Befehl `exportfs -av` seinem System sagen, dass sich etwas geändert hat. Man kann den Service aber auch einfach restarten mit `sudo systemctl restart nfs-server`. Man sollte, wenn man den Service immer gestartet haben möchte, den Service mit `sudo systemctl enable nfs-server` enablen. Somit wird der Service direkt beim Systemstart gestartet.
 
-
-
 Wenn man jetzt das nfs directory einer anderen Maschine mounten möchte, kann man entweder das `/etc/fstab` file bearbeiten, oder es direkt mit dem `mount` Befehl an einem Mounting point einhängen:
 
 ```shell
@@ -180,15 +172,11 @@ $ sudo mount servername:/projekte /mnt/nfs/projekte
 
 Nun haben wir die geteilten Inhalte von `/projekte` an unserem Mounting point `/mnt/nfs/projekte` gemounted. Man muss hierbei beachten, dass wenn man das `/etc/fstab` file nicht bearbeitet, die Partition bei einem Systemneustart wieder unmounted wird.
 
-
-
 # 2. Filesystem Architektur
 
 ## 2.1 Übersicht der home-directories
 
 Jeder user hat normalerweise ein eigenes directorie unter `/home/[Benutzername]`. Der root Benutzer hat ebenso sein eigenes Verzeichnis, nur unterr `/root`.
-
-
 
 Auf einem System, welches von mehreren Benutzern verwendet wird, besteht das `/home` Verzeichnis meistens nur aus seperaten, gemounteten Filesystemen oder sogar exported (shared) auf einem remote Netzwerk mittels NFS.
 
@@ -202,21 +190,13 @@ Eine Schule könnte z.B. folgende Struktur verwenden:
 
 `/home/students/`
 
-
-
 ![home directories](https://courses.edx.org/assets/courseware/v1/9817790ba352d4047027eb1d61516db5/asset-v1:LinuxFoundationX+LFS101x+1T2020+type@asset+block/Home_directories.png)
-
-
 
 ## 2.2 Das /bin und /sbin Directory
 
 Der `/bin` Ordner enthält ausführbare binarie sowie notwendige Befehle welche für das Hochfahren des Systems sowie für die Verwendung im single-user-mode verwendet werden. Ebenso notwendige Befehle für alle Systembenutzer, wie z.B. `cat`, `cp`, `mv`, `ps` und `rm`.
 
-
-
 Der `/sbin` Ordner ist für notwendige binaries gedacht, welche für die Systemadministration notwendig sind. Z.b. wären dies `fsck` und `ip`.
-
-
 
 Befehle, welche (theoretisch) nicht unbedingt notwendig für das Hochfahren sowie für die Verwendung im single-user-mode sind, befinden sich in `/usr/bin` sowie `/usr/sbin`.
 
@@ -224,15 +204,13 @@ Heutzutage sind in modernen Distributionen sind die `/bin` directories miteinand
 
 ![](/home/manu/.config/marktext/images/2023-01-01-15-43-43-image.png)
 
-
-
 ## 2.3 Das /proc Filesystem
 
 Manche Filesysteme, wie z.B. das mounted Filesystem an `/proc`, werden **pseudo-Filesysteme** genannt. Dies ist der Fall, da sie keine permanente Präsenz auf der Festplatte haben.
 
 Das `/proc` Filesystem beinhaltet **virtual files** (files, welche nur im Arbeitsspeicher existieren) welche Kernel daten anzeigen. Diese Kernel daten ändern sich (logischerweise) in Echtzeit. `/proc` beinhaltet Dateien und Ordner, welche die Kernelstruktur nachahmen und Konfigurationsinformationen beinhalten.
 
-Es beinhaltet keine echten Dateien, jedoch runtime system informationen, z.B. system memory devices mounted, hardware configuration, etc.
+Es beinhaltet keine echten Dateien, jedoch runtime system informationen, z.B. system memory, devices mounted, hardware configuration, etc.
 
 Die folgenden Ordner sind sehr wichtige Einträge in `/proc`:
 
@@ -254,25 +232,21 @@ Das `/proc` Filesystem inkludiert auch sub-Ordner, wie z.B. momentan laufende Pr
 
 - `/proc/sys`
 
-
-
 Wie bereits erwähnt, existieren in `/proc` Ordner für jeden Prozess im gesamten System. Diese Ordner beinhalten vitale Informationen zu den jeweiligen Prozessen.
 
 Der `/proc/sys` Ordner beinhaltet viele Infromationen über das gesamte System, genauer gesagt über die Hardware Konfiguration. Die Informationen in `/proc` sind sehr nützlich, in Echtzeit und werden niemals permanent auf der Festplatte gespeichert.
 
 ![](/home/manu/.config/marktext/images/2023-01-01-15-59-28-image.png)
 
-
-
 ## 2.4 Der /dev Ordner
 
-Der `/dev` Ordner beinhaltet sogenannte **device nodes**, ein Typ von pseudo-files welcher von dne meisten hardware und software Geräten verwendet wird. Die Außnahme sind hier Netzwerkgeräte.
+Der `/dev` Ordner beinhaltet sogenannte **device nodes**, ein Typ von pseudo-files welcher von den meisten hardware und software Geräten verwendet wird. Die Außnahme sind hier Netzwerkgeräte.
 
 Das directory:
 
 - Ist leer auf der Partition wenn es nicht gemounted ist
 
-- Beinhaltet Einträge, welce von dem **udev** System generiert worden sind. Das **udev** System erstellt und verwaltet device nodes in Linux. Die Einträge werden dynamisch erstellt, sobald die Geräte gefunden worden sind. 
+- Beinhaltet Einträge, welche von dem **udev** System generiert worden sind. Das **udev** System erstellt und verwaltet device nodes in Linux. Die Einträge werden dynamisch erstellt, sobald die Geräte gefunden worden sind. 
 
 - Das `/dev` directory beinhaltet Sachen wie z.B.:
   
@@ -283,8 +257,6 @@ Das directory:
   - `/dev/random` (eine Quelle für Zufallszahlen)
 
 ![](/home/manu/.config/marktext/images/2023-01-01-15-59-03-image.png)
-
-
 
 ## 2.5 Der /var Ordner
 
@@ -300,8 +272,6 @@ Also kann das `/var` directory z.B. folgende Einträge besitzen:
 
 - Temporäre Dateien: `/var/temp`
 
-
-
 ![The /var Directory](https://courses.edx.org/assets/courseware/v1/948dafcdc47f674bd2c0b5c1560ebb7c/asset-v1:LinuxFoundationX+LFS101x+1T2020+type@asset+block/varfolders.png)
 
 Das `/var` directory kann auch auf einem eigenen Filesystem platziert werden, damit ein drastisches Wachstum der Dateien nicht das System fatal beeinflussen.
@@ -310,21 +280,15 @@ Ordner für Netzwerk Services (z.B. `/var/ftp`-> FTP Service) und für Web Servi
 
 ![](/home/manu/.config/marktext/images/2023-01-01-16-04-52-image.png)
 
-
-
 ## 2.5 Der /etc Ordner
 
 Im `/etc` Ordner befinden sich Dateien für die Systemkonfiguration. 
 
 So ist z.B. im File `/etc/resolv.conf` festgelegt, wo das System hingehen soll, um sich eine IP Adresse zu holen (DNS). Auch dateien wie `passwd`, `shadow` und `group` für die Benutzerverwaltung sind in `/etc` anzutreffen.
 
-
-
 **Note:** Die Konfigurationsdateien in `/etc/` gelten Systemweit, können also nur vom Superuser geändert oder erstellt werden.
 
 ![](/home/manu/.config/marktext/images/2023-01-01-16-08-44-image.png)
-
-
 
 ## 2.6 Das /boot Verzeichnis
 
@@ -346,15 +310,11 @@ Der `/boot` Ordner beinhaltet alle Files, welche für den System-boot benötigt 
    
    Die Kernel Symboltabelle, wird nur für das debugging verwendet
 
-
-
 Jedes dieser Dateien hat die Kernelversion hinten an dem Namen drann.
 
 Was ebenso noch im `/boot` Verzeichnis zu finden ist, ist der Grand Unified Bootloader (GRUB). Dieser repräsentiert sich mit Dateien wie z.B. `/boot/grub/grub.cfg` .
 
 ![](/home/manu/.config/marktext/images/2023-01-01-16-14-01-image.png)
-
-
 
 ## 2.7 Das /lib und /lib64 Verzeichnis
 
@@ -368,8 +328,6 @@ In manchen Linux Distributionen gibt es einen `/lib64` Ordner, in welchem sich d
 
 Kernel module (kernel code, meistens device drivers welche ohne System neustart geladen und ungeladen werden können) befinden sich unter `/lib/modules/<kernel-version-nummer>`.
 
-
-
 ## 2.8 Auswerfbare Medien: /media, /run und /mnt
 
 Man verwendet selbst heutzutage immer noch gerne auswerfbare Medien wie z.B. einen USB-Stick. Diese Filesysteme müssen an den richtigen locations gemounte werden. Die meisten Linux Systeme mounten solche Medien automatisch wenn das System den Input bemerkt.
@@ -382,11 +340,7 @@ Zum Beispiel: Wenn ich nun einen USB-Stick namens `usb120` in meinen Laptop stec
 
 ![](/home/manu/.config/marktext/images/2023-01-01-16-23-30-image.png)
 
-
-
 Der `/mnt` Ordner wird schon sehr lange für das mounten von Filesystemen verwendet. Meistens sind dies Network Filesysteme, welche normalerweise nicht gemounted sind. Oder temporäre Partitionen oder sogenannte **loopback** Filesysteme, welche Files sind, die sich als Partitionen ausgeben.
-
-
 
 ## 2.9 Sonstige Ordner unter /:
 
@@ -400,15 +354,13 @@ Der `/mnt` Ordner wird schon sehr lange für das mounten von Filesystemen verwen
 
 - `/usr` -> Multi-user Applikationen, Hilfsprogramme und daten
 
-
-
 ## 2.10 Die /usr Baumstruktur
 
 Der `/user` Ordner beinaltet theoretische nicht-notwendige Programme und Scripts (sie werden nicht für das Hochfahren des Systems benötigt). 
 
 Der Ordner hat die folgenden Unterordner:
 
-- `/usr/include` -> Header files welche für das Kompillieren von Applikationen verwendet werden
+- `/usr/include` -> Header files welche für das Kompillieren von Applikationen verwendet werdenader files welche für das Kompil
 
 - `/usr/lib` -> Libraries für Programme in `/usr/bin` und `/usr/sbin`
 
@@ -424,11 +376,7 @@ Der Ordner hat die folgenden Unterordner:
 
 - `/usr/bin` -> Das primäre Verzeichnis für das Ausführen von Befehlen auf dem System
 
-
-
 # 3. Comparing Files and File Types
-
-
 
 ## 3.1 Comparing Files with diff
 
@@ -461,8 +409,6 @@ $ diff -ciw file1.txt file2.txt
   root           8  0.0  0.0      0     0 ?        I<   Dez29   0:00 [kworker/0:0H-events_highpri]
 ```
 
-
-
 ## 3.2 diff3 und patch verwenden
 
 Man kann auch 3 Files gleichzeitig vergleichen. Mit `diff3` ist es möglich.
@@ -477,8 +423,6 @@ z.B.
 $ diff3 MY-FILE COMMON-FILE YOUR-FILE
 ```
 
-
-
 Die meisten Modifikationen in source code werden mit einem `patch` übertragen. Ein `patch` File beinhaltet die deltas (die Unterschiede) welche dazu benötigt werde, die ältere Version einer Datei zu einer neuern Version aktualisieren. 
 
 Patch files werden folgendermaßen produziert:
@@ -489,16 +433,12 @@ $ diff -Nur originalfile newfile > patchfile
 
 Nur den patch zu veröffentlichen ist effizienter und übersichtlicher, da sich so nur wenige Zeilen ändern muss, anstatt das gesamte Konstrukt.
 
-
-
 Um einen Patch anzuwenden, gibt es zwei Optionen:
 
 ```shell
 $ patch -p1 < patchfile
 $ patch originalfile patchfile
 ```
-
-
 
 ## 3.3 Das Hilfsprogramm file
 
@@ -509,8 +449,6 @@ In Linux ist der Filename eher für den Benutzer und weniger für das System ged
 Dies ist in Windows z.B. nicht so, Windows klassifiziert alle Files anhand ihrer extension. Z.b. ist ein `.exe` file unter windows strikt ein ausführbares binary file.
 
 Das `file` Programm nimmt den Inhalt eines Files und findet anhand diesen Heraus, welcher Typ es ist.
-
-
 
 Anwendung:
 
@@ -523,11 +461,7 @@ File1: Java source, ASCII text
 File2: Python script, ASCII text executable
 ```
 
-
-
 # 4. Backing Up and Compressing Data
-
-
 
 ## 4.2 Daten Backupen
 
@@ -536,8 +470,6 @@ Es gibt vielerlei Wege wie man Daten oder sogar das gesamte System einem Backup 
 Beides kann dazu verwendet werden um gesamte Verzeichnisbäume zu synchronisieren. Jedoch ist `rsync` effizienter weil es überprüft, ob das kopierte File bereits existiert. `rsync` beugt also Duplikate vor und kopiert nur die Bereiche, welche geändert wurden.
 
 `cp` kann nur dazu verwendet werden um files lokal auf der eigenen Maschine zu kopieren (außer man hat ein Netzwerklaufwerk mit NFS oder ähnliches gemounted), während `rsync` Daten von einem auf dem anderen Rechner übertragen kann.
-
-
 
 ### 4.2.1 rsync anwenden
 
@@ -549,8 +481,6 @@ $ rsync -r project-X archive-machine:archive/project-x
 
 **Note:** `rsync` kann sehr zerstörerisch sein! Die Falsche Verwendung des Programms kann sehr viel Schaden anrichten. Man sollte genau auf alle Pfade und Optionen achten. Der erste Befehl sollte auch die Option `--dry-run` beinhalten.
 
-
-
 Um `rsync` normal in der Kommandozeile zu verwenden, kann man den Syntax `rsync sourcefile destinationfile`  verwenden. Der Inhalt von `sourcefile` wird zum `destinationfile` kopiert.
 
 Eine gute Kombination von optionen ist das folgende:
@@ -558,8 +488,6 @@ Eine gute Kombination von optionen ist das folgende:
 ```shell
 $ rsync --progress -avrxH --delete sourcedir destdir
 ```
-
-
 
 ## 4.3 Files komprimieren
 
@@ -575,11 +503,7 @@ In Linux gibt es folgende Tools, mit denen es möglich ist, files zu komprimiere
 
 - `zip` -> Wird oft dazu benötigt, um Archives von anderen Betriebssystemen zu untersuchen oder zu de-komprimieren.
 
-
-
 Ebenso wird das `tar` Programm häufig verwendet, um Files in einem Archiv zu gruppieren und dann dieses ganze Archiv zu komprimieren.
-
-
 
 ### 4.3.1 gzip verwenden
 
@@ -589,15 +513,11 @@ Ebenso wird das `tar` Programm häufig verwendet, um Files in einem Archiv zu gr
 
 - `gunzip foo` -> De-Komprimiert **foo**. Man kann auch einfach `gzip -d` schreiben.
 
-
-
 ### 4.3.2 bzip2 verwenden
 
 - `bzip2 *` -> Komprimiert alle Dateien in einem Verzeichnis. Die Dateien werden komprimiert und mit einer **.bz2** extension versehen.
 
 - `bunzip2 *.bz2` -> De-Komprimiert alle Files mit der **.bz2** extension. Man kann auch `bzip2 -d` schreiben.
-
-
 
 ### 4.3.3 xz verwenden
 
@@ -613,8 +533,6 @@ Ebenso wird das `tar` Programm häufig verwendet, um Files in einem Archiv zu gr
 
 - `xd -d *.xz` -> De-Komprimiert alle komprimierten files, welche xz benutzen
 
-
-
 ### 4.3.4 zip verwenden
 
 `zip` wird in Linux nicht oft verwendet. Es wird jedoch dann benötigt, wenn man z.B. komprimierte Dateien von einem anderen Betriebssystem bekommt.
@@ -626,8 +544,6 @@ Wenn ein Linux user z.B. ein `.zip` Archiv von einem Windows user bekommt, muss 
 - `zip -r backup.zip ~` -> Archiviert das Home directory (~) und packt alles in backup.zip.
 
 - `unzip backup.zip` -> De-Komprimiert backup.zip und packt es in das momentane Verzeichnis.
-
-
 
 ## 5. Archivierung und Komprimierung mit tar
 
@@ -643,8 +559,6 @@ Früher stand `tar` für "**t**ape **a**rchive" und wurde dazu verwendet, Daten 
 
 - `tar xvf mydir.tar.gz` -> Extrahiere alle Dateien von mydir.tar.gz in mydir.
 
-
-
 ## 6. Disk-To-Disk Copying (dd)
 
 Das `dd` Programm ist sehr nützlich um raw disk space zu kopieren. Zum Beispiel: um den Master Boot Record (MBR) (der erstn 512-bytes Sektor auf der Festplatte), könnte man dies mit dem folgendem Befehl schreiben:
@@ -652,8 +566,6 @@ Das `dd` Programm ist sehr nützlich um raw disk space zu kopieren. Zum Beispiel
 ```shell
 $ dd if=/dev/sda of=sda.mbr bs=512 count=1
 ```
-
-
 
 **WARNUNG!**
 
@@ -667,8 +579,4 @@ kopiert eine Festplatte auf eine andere. Jedoch wird der Inhalt der zweiten Fest
 
 **Man sollte mit dem dd Kommand nicht experimentieren. Dieser Befehl kann eine ganze Festplatte löschen!**
 
-
-
 ![Disk-to-Disk Copying (dd)](https://courses.edx.org/assets/courseware/v1/6ed7efb57f544c1bbac9baf55f75e535/asset-v1:LinuxFoundationX+LFS101x+1T2020+type@asset+block/LFS01_ch08_screen_41.jpg)
-
-
