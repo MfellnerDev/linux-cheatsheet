@@ -8,7 +8,7 @@ Thema: **File Operations**
 
 # 1. Einführun zu Filesystemen
 
-In Linux (und allen weiteren UNIX-like OSs) wird oft das Prinzip "Everything is a file" verwendet. Also wird das System auch in diesem schema gehalten. Egal ob es jetzt normale Dokumente oder Geräte wie eine Soundkarte sind, man kann in Linux damit im Filesystem interagieren. Man kann sie also lesen, beschreiben usw. 
+In Linux (und allen weiteren UNIX-like OSs) wird oft das Prinzip "Everything is a file" verwendet. Also wird das System auch in diesem schema gehalten. Egal ob es jetzt normale Dokumente oder Geräte wie eine Soundkarte sind, man kann in Linux damit im Filesystem interagieren. Man kann sie also lesen, beschreiben usw.
 
 In vielen Systemen (inkl. Linux) ist das Filesystem in einer Baumstruktur strukturiert. Dieser Baum startet bei etwas, das man meistens **root directory** (root Verzeichnis) nennt, welches den Beginn des Filesystems repräsentiert. Grundsätzlich ist das root Verzeichnis unter der location **/** bekannt.
 
@@ -19,22 +19,24 @@ In vielen Systemen (inkl. Linux) ist das Filesystem in einer Baumstruktur strukt
 Linux unterstützt ziemlich viele Filesysteme, von Entwicklern werden sie folgendermaßen genannt:
 
 - ext3 (extended Filesystem V3)
-
+  
 - ext4 (extended Filesystem V4), wird Hauptsächlich im Linux bereich verwendet
-
+  
 - squashfs
-
+  
 - btrfs
+  
 
 Ebenso existieren folgende Filesysteme, welche zwar von Linux unterstützt werden, man aber normalerweise nicht in einem Linux System verwendet:
 
 - NTFS, vfat (Windows)
-
+  
 - xfs (SGI)
-
+  
 - jfs (IBM)
-
+  
 - hfs, hfs+ (MacOS)
+  
 
 Viele andere, ältere Filesysteme wie z.B. FAT werden ebenso unterstützt.
 
@@ -42,7 +44,7 @@ Ein Filesystem ist elementar für ein System und oft werden auf einem System meh
 
 ## 1.2 Linux Partitionen
 
-Jedem Filesystem auf einem Linux System besitzt eine sogenannte **disk Partition**. Diese Partitionen helfen bei der Organisation der Daten auf der Festplatte, sie werden nach der Nutzung und dem Zweck aufgeteilt. Zum Beispiel trennt man normalerweise die `/boot/efi` Partition und die `root` Partition. Die root Partition wird normalerweise `root` oder `/` genannt. Auf dieser Partition befinden sich normalerweise alle Daten, welche von Benutzern des Systems verwendet werden (`/home`). 
+Jedem Filesystem auf einem Linux System besitzt eine sogenannte **disk Partition**. Diese Partitionen helfen bei der Organisation der Daten auf der Festplatte, sie werden nach der Nutzung und dem Zweck aufgeteilt. Zum Beispiel trennt man normalerweise die `/boot/efi` Partition und die `root` Partition. Die root Partition wird normalerweise `root` oder `/` genannt. Auf dieser Partition befinden sich normalerweise alle Daten, welche von Benutzern des Systems verwendet werden (`/home`).
 
 Ebenso getrennt von anderen Partitionen ist die `linuxswap` Partition. Wie der Name schon sagt, enthält diese Partition den SWAP-Speicher für das Linux System.
 
@@ -50,7 +52,7 @@ Der Vorteil einer solchen funktionalen Trennung/Isolation ist, dass sich das Sys
 
 Das folgende Bild repräsentiert meine momentanen Partitionen:
 
-<img src="file:///home/manu/.config/marktext/images/2023-01-01-14-25-01-image.png" title="" alt="" width="705">
+![](file:///home/manu/.config/marktext/images/2023-01-01-14-25-01-image.png?msec=1673142228837)
 
 ## 1.3 Mount Points
 
@@ -67,8 +69,9 @@ $ sudo mount /dev/sda5 /home
 ```
 
 - `/dev/sda5` ist in dem Fall das Filesystem, welches wir mounten wollen
-
+  
 - `/home` ist das Directory, an welches wir `/dev/sda5` einhängen
+  
 
 Der Befehl wird nun die Disk Partition, welche mit dem device node `/dev/sda5` verbunden ist im mounting point `/home` einhängen.
 
@@ -80,7 +83,7 @@ $ sudo umount /home
 
 Dieser Befehl würde das Filesystem dann vom mounting Point `/home` aushängen.
 
-Beachte, dass **umount != unmount** ist. Nur ein root user hat normalerweise das Privileg, diesen Befehl auszuführen. 
+Beachte, dass **umount != unmount** ist. Nur ein root user hat normalerweise das Privileg, diesen Befehl auszuführen.
 
 Wenn man ein Filesystem direkt beim Systemstart mounten möchte, muss man das `/etc/fstab` File richtig bearbeiten (fstab = filesystem table). Wenn man sich das File anschaut, kann man bereits alle vorhandenen Filesysteme finden:
 
@@ -131,11 +134,11 @@ tmpfs          tmpfs     1,5G  100K  1,5G   1% /run/user/1000
 
 ## 1.5 NFS und Network Filesysteme
 
-Oft ist es nötig, Dateien von einem physikalischen System zu einem anderen zu transferieren. Diese können lokal im gleichen Netz oder irgendwo verstreut im Internet sein. Ein `network (distributed) filesystem` kann alle seine Daten auf einer Maschine oder auf mehreren Maschinen haben. 
+Oft ist es nötig, Dateien von einem physikalischen System zu einem anderen zu transferieren. Diese können lokal im gleichen Netz oder irgendwo verstreut im Internet sein. Ein `network (distributed) filesystem` kann alle seine Daten auf einer Maschine oder auf mehreren Maschinen haben.
 
 Man kann sich ein Netzwerkfilesystem einfach nur als eine Gruppierung von low level filesystemen von verschiedenen Typen vorstellen.
 
-![The client-server architecture of NFS](https://courses.edx.org/assets/courseware/v1/b29a567ddecc954ea6440a9e4dedd067/asset-v1:LinuxFoundationX+LFS101x+1T2020+type@asset+block/nfs.png)
+![The clientserver architecture of NFS](https://courses.edx.org/assets/courseware/v1/b29a567ddecc954ea6440a9e4dedd067/asset-v1:LinuxFoundationX+LFS101x+1T2020+type@asset+block/nfs.png)
 
 > Viele Systemadministratoren mounten remote users' home directories auf einem Server um ihnen Zugriff zu den selben Files und Konfigurationen über mehrere Systemen verteilt zu geben. Dieses Vorgehen erlaubt dem Benutzer, dass er auf Daten eines anderen Rechners zugreift, während er sich immer noch auf der eigenen Maschine befindet.
 
@@ -202,7 +205,7 @@ Befehle, welche (theoretisch) nicht unbedingt notwendig für das Hochfahren sowi
 
 Heutzutage sind in modernen Distributionen sind die `/bin` directories miteinander mittels Systemlinks verbunden (siehe Screenshot).
 
-![](/home/manu/.config/marktext/images/2023-01-01-15-43-43-image.png)
+![](file:///home/manu/.config/marktext/images/2023-01-01-15-43-43-image.png?msec=1673142228838)
 
 ## 2.3 Das /proc Filesystem
 
@@ -215,28 +218,30 @@ Es beinhaltet keine echten Dateien, jedoch runtime system informationen, z.B. sy
 Die folgenden Ordner sind sehr wichtige Einträge in `/proc`:
 
 - `/proc/cpuinfo`
-
+  
 - `/proc/interrupts`
-
+  
 - `/proc/meminfo`
-
+  
 - `/proc/mounts`
-
+  
 - `/proc/partitions`
-
+  
 - `/proc/versions`
+  
 
 Das `/proc` Filesystem inkludiert auch sub-Ordner, wie z.B. momentan laufende Prozesse sowie sonstige Systeminformationen:
 
 - `/proc/<ProzessID>/`
-
+  
 - `/proc/sys`
+  
 
 Wie bereits erwähnt, existieren in `/proc` Ordner für jeden Prozess im gesamten System. Diese Ordner beinhalten vitale Informationen zu den jeweiligen Prozessen.
 
 Der `/proc/sys` Ordner beinhaltet viele Infromationen über das gesamte System, genauer gesagt über die Hardware Konfiguration. Die Informationen in `/proc` sind sehr nützlich, in Echtzeit und werden niemals permanent auf der Festplatte gespeichert.
 
-![](/home/manu/.config/marktext/images/2023-01-01-15-59-28-image.png)
+![](file:///home/manu/.config/marktext/images/2023-01-01-15-59-28-image.png?msec=1673142228875)
 
 ## 2.4 Der /dev Ordner
 
@@ -245,18 +250,19 @@ Der `/dev` Ordner beinhaltet sogenannte **device nodes**, ein Typ von pseudo-fil
 Das directory:
 
 - Ist leer auf der Partition wenn es nicht gemounted ist
-
-- Beinhaltet Einträge, welche von dem **udev** System generiert worden sind. Das **udev** System erstellt und verwaltet device nodes in Linux. Die Einträge werden dynamisch erstellt, sobald die Geräte gefunden worden sind. 
-
+  
+- Beinhaltet Einträge, welche von dem **udev** System generiert worden sind. Das **udev** System erstellt und verwaltet device nodes in Linux. Die Einträge werden dynamisch erstellt, sobald die Geräte gefunden worden sind.
+  
 - Das `/dev` directory beinhaltet Sachen wie z.B.:
   
   - `/dev/sda1` (erste Partition auf der ersten Festplatte)
-  
+    
   - `/dev/lp1` (der zweite Drucker)
-  
+    
   - `/dev/random` (eine Quelle für Zufallszahlen)
+    
 
-![](/home/manu/.config/marktext/images/2023-01-01-15-59-03-image.png)
+![](file:///home/manu/.config/marktext/images/2023-01-01-15-59-03-image.png?msec=1673142228876)
 
 ## 2.5 Der /var Ordner
 
@@ -265,12 +271,13 @@ Der `/var` Ordner beinhaltet Dateien, bei denen man ein Wachstum in der Größe 
 Also kann das `/var` directory z.B. folgende Einträge besitzen:
 
 - System log Dateien: `/var/log`
-
+  
 - Packages und database Dateien: `/var/lib`
-
+  
 - Druckwarteschlangen: `/var/spool`
-
+  
 - Temporäre Dateien: `/var/temp`
+  
 
 ![The /var Directory](https://courses.edx.org/assets/courseware/v1/948dafcdc47f674bd2c0b5c1560ebb7c/asset-v1:LinuxFoundationX+LFS101x+1T2020+type@asset+block/varfolders.png)
 
@@ -278,53 +285,54 @@ Das `/var` directory kann auch auf einem eigenen Filesystem platziert werden, da
 
 Ordner für Netzwerk Services (z.B. `/var/ftp`-> FTP Service) und für Web Services (z.B. `/var/www` -> HTTP web service) sind ebenso in `/var` anzutreffen.
 
-![](/home/manu/.config/marktext/images/2023-01-01-16-04-52-image.png)
+![](file:///home/manu/.config/marktext/images/2023-01-01-16-04-52-image.png?msec=1673142228841)
 
 ## 2.5 Der /etc Ordner
 
-Im `/etc` Ordner befinden sich Dateien für die Systemkonfiguration. 
+Im `/etc` Ordner befinden sich Dateien für die Systemkonfiguration.
 
 So ist z.B. im File `/etc/resolv.conf` festgelegt, wo das System hingehen soll, um sich eine IP Adresse zu holen (DNS). Auch dateien wie `passwd`, `shadow` und `group` für die Benutzerverwaltung sind in `/etc` anzutreffen.
 
 **Note:** Die Konfigurationsdateien in `/etc/` gelten Systemweit, können also nur vom Superuser geändert oder erstellt werden.
 
-![](/home/manu/.config/marktext/images/2023-01-01-16-08-44-image.png)
+![](file:///home/manu/.config/marktext/images/2023-01-01-16-08-44-image.png?msec=1673142228900)
 
 ## 2.6 Das /boot Verzeichnis
 
 Der `/boot` Ordner beinhaltet alle Files, welche für den System-boot benötigt werden. Für jeden auf dem System installierten Kernel finden sich folgende 4 Dateien wieder:
 
 1. `vmlinuz`
-   
-   Der komprimierte Linxu Kernel, für den boot notwendig.
-
+  
+  Der komprimierte Linxu Kernel, für den boot notwendig.
+  
 2. `initramfs`
-   
-   Das initial ram filesystem, für den boot notwendig, manchmal `initrd` genannt.
-
-3. `config` 
-   
-   Das Kernel Konfigurationsfile, wird nur für debuggung und bookkeeping verwendet
-
-4. `System.map` 
-   
-   Die Kernel Symboltabelle, wird nur für das debugging verwendet
+  
+  Das initial ram filesystem, für den boot notwendig, manchmal `initrd` genannt.
+  
+3. `config`
+  
+  Das Kernel Konfigurationsfile, wird nur für debuggung und bookkeeping verwendet
+  
+4. `System.map`
+  
+  Die Kernel Symboltabelle, wird nur für das debugging verwendet
+  
 
 Jedes dieser Dateien hat die Kernelversion hinten an dem Namen drann.
 
 Was ebenso noch im `/boot` Verzeichnis zu finden ist, ist der Grand Unified Bootloader (GRUB). Dieser repräsentiert sich mit Dateien wie z.B. `/boot/grub/grub.cfg` .
 
-![](/home/manu/.config/marktext/images/2023-01-01-16-14-01-image.png)
+![](file:///home/manu/.config/marktext/images/2023-01-01-16-14-01-image.png?msec=1673142228842)
 
 ## 2.7 Das /lib und /lib64 Verzeichnis
 
 Der `/lib` Ordner beinhaltet libraries (Code, welcher von Applikationen geteilt und benötigt wird) für alle essentiellen Programme in `/bin` und `/sbin`. Die Dateinamen dieser libraries starten entweder mit `ld` oder `lib` . Z.b.: `libmbim-glib.so.4.7.0`.
 
-Die meisten libraries hier sind auch bekannt als dynamically loaded libraries (shared libraries). 
+Die meisten libraries hier sind auch bekannt als dynamically loaded libraries (shared libraries).
 
 In manchen Linux Distributionen gibt es einen `/lib64` Ordner, in welchem sich die libraries im 64-bit-Format befinden, während die libraries in `/lib` im 32-bit-Format sind.
 
-![](/home/manu/.config/marktext/images/2023-01-01-16-18-24-image.png)
+![](file:///home/manu/.config/marktext/images/2023-01-01-16-18-24-image.png?msec=1673142228843)
 
 Kernel module (kernel code, meistens device drivers welche ohne System neustart geladen und ungeladen werden können) befinden sich unter `/lib/modules/<kernel-version-nummer>`.
 
@@ -332,67 +340,70 @@ Kernel module (kernel code, meistens device drivers welche ohne System neustart 
 
 Man verwendet selbst heutzutage immer noch gerne auswerfbare Medien wie z.B. einen USB-Stick. Diese Filesysteme müssen an den richtigen locations gemounte werden. Die meisten Linux Systeme mounten solche Medien automatisch wenn das System den Input bemerkt.
 
-In der Vergangenheit wurden die Geräte unter `/media` gemounted, wobei moderne Linux Distributionen die Geräte nun unter `/run` mounten. 
+In der Vergangenheit wurden die Geräte unter `/media` gemounted, wobei moderne Linux Distributionen die Geräte nun unter `/run` mounten.
 
 Zum Beispiel: Wenn ich nun einen USB-Stick namens `usb120` in meinen Laptop stecke, wird er unter der folgenden Location gemounted:
 
-- `/run/media/manu/usb120` 
+- `/run/media/manu/usb120`
 
-![](/home/manu/.config/marktext/images/2023-01-01-16-23-30-image.png)
+![](file:///home/manu/.config/marktext/images/2023-01-01-16-23-30-image.png?msec=1673142228844)
 
 Der `/mnt` Ordner wird schon sehr lange für das mounten von Filesystemen verwendet. Meistens sind dies Network Filesysteme, welche normalerweise nicht gemounted sind. Oder temporäre Partitionen oder sogenannte **loopback** Filesysteme, welche Files sind, die sich als Partitionen ausgeben.
 
 ## 2.9 Sonstige Ordner unter /:
 
 - `/opt` -> Optionale software packages für Applikationen
-
+  
 - `/sys` -> Virtuelles pseude-filesystem welches Informationen über das System und die Hardware beinhaltet. Kann für die Veränderung von System Parametern und für debugging verwendet werden
-
+  
 - `/srv` -> Site-specific data welche von dem System kommen. Selten verwendet.
-
+  
 - `/tmp` -> Temporäre Files; in manchen Distributionen gelöscht nach einem reboot und/oder ein ramdisk in memory
-
+  
 - `/usr` -> Multi-user Applikationen, Hilfsprogramme und daten
+  
 
 ## 2.10 Die /usr Baumstruktur
 
-Der `/user` Ordner beinaltet theoretische nicht-notwendige Programme und Scripts (sie werden nicht für das Hochfahren des Systems benötigt). 
+Der `/usr` Ordner beinaltet theoretische nicht-notwendige Programme und Scripts (sie werden nicht für das Hochfahren des Systems benötigt).
 
 Der Ordner hat die folgenden Unterordner:
 
 - `/usr/include` -> Header files welche für das Kompillieren von Applikationen verwendet werdenader files welche für das Kompil
-
+  
 - `/usr/lib` -> Libraries für Programme in `/usr/bin` und `/usr/sbin`
-
+  
 - `/usr/lib64` -> 64-bit Libraries für 64-bit Programme
-
+  
 - `/usr/sbin` -> Nicht-elementare System binaries, z.B. system daemons
-
+  
 - `/usr/share` -> Von Applikationen geteilte Daten, abhängig von der Architektur
-
+  
 - `/usr/src` -> Source code, normalerweise für den Linux kernel
-
+  
 - `/usr/local` -> Daten und Programme spezifisch für die lokale Maschine
-
+  
 - `/usr/bin` -> Das primäre Verzeichnis für das Ausführen von Befehlen auf dem System
+  
 
 # 3. Comparing Files and File Types
 
 ## 3.1 Comparing Files with diff
 
-Der Befehl `diff` wird verwendet, um files und Verzeichnisse miteinander zu vergleichen (-> `man diff` für mehr). 
+Der Befehl `diff` wird verwendet, um files und Verzeichnisse miteinander zu vergleichen (-> `man diff` für mehr).
 
 `diff` besitzt die folgenden Optionen:
 
 - `-c` -> Gibt eine Liste von den Unterschieden zurück. Inkludiert lines of context davor und nachdem Unterschied.
-
+  
 - `-r` -> Vergleicht Verzeichnisse rekursiv
-
+  
 - `-i` -> Groß- und Kleinschreibung ignorieren
-
+  
 - `w` -> Die Unterschiede in spaces und tabs (white spaces) ignorieren
-
+  
 - `-q` -> Be quiet: Einfach nur ein report, ob files Unterschiede besitzen, ohne diese anzuzeigen.
+  
 
 Anwendung:
 
@@ -417,13 +428,13 @@ Man kann auch 3 Files gleichzeitig vergleichen. Mit `diff3` ist es möglich.
 
 Syntax: `diff3 [option] file1.txt basis-file.txt file2.txt`
 
-z.B. 
+z.B.
 
 ```shell
 $ diff3 MY-FILE COMMON-FILE YOUR-FILE
 ```
 
-Die meisten Modifikationen in source code werden mit einem `patch` übertragen. Ein `patch` File beinhaltet die deltas (die Unterschiede) welche dazu benötigt werde, die ältere Version einer Datei zu einer neuern Version aktualisieren. 
+Die meisten Modifikationen in source code werden mit einem `patch` übertragen. Ein `patch` File beinhaltet die deltas (die Unterschiede) welche dazu benötigt werde, die ältere Version einer Datei zu einer neuern Version aktualisieren.
 
 Patch files werden folgendermaßen produziert:
 
@@ -442,9 +453,9 @@ $ patch originalfile patchfile
 
 ## 3.3 Das Hilfsprogramm file
 
-In Linux, die File extension ist meistens unwichtig. Jemand kann nicht davon ausgehen, dass z.B. `file1.txt` einfach nur ein Textfile und kein ausführbares Programm ist. 
+In Linux, die File extension ist meistens unwichtig. Jemand kann nicht davon ausgehen, dass z.B. `file1.txt` einfach nur ein Textfile und kein ausführbares Programm ist.
 
-In Linux ist der Filename eher für den Benutzer und weniger für das System gedacht. Die meisten Applikationen nehmen direkt den Inhalt eines Files um den Filetyp festzustellen, anstatt sich auf die Extension zu verlassen. 
+In Linux ist der Filename eher für den Benutzer und weniger für das System gedacht. Die meisten Applikationen nehmen direkt den Inhalt eines Files um den Filetyp festzustellen, anstatt sich auf die Extension zu verlassen.
 
 Dies ist in Windows z.B. nicht so, Windows klassifiziert alle Files anhand ihrer extension. Z.b. ist ein `.exe` file unter windows strikt ein ausführbares binary file.
 
@@ -481,7 +492,7 @@ $ rsync -r project-X archive-machine:archive/project-x
 
 **Note:** `rsync` kann sehr zerstörerisch sein! Die Falsche Verwendung des Programms kann sehr viel Schaden anrichten. Man sollte genau auf alle Pfade und Optionen achten. Der erste Befehl sollte auch die Option `--dry-run` beinhalten.
 
-Um `rsync` normal in der Kommandozeile zu verwenden, kann man den Syntax `rsync sourcefile destinationfile`  verwenden. Der Inhalt von `sourcefile` wird zum `destinationfile` kopiert.
+Um `rsync` normal in der Kommandozeile zu verwenden, kann man den Syntax `rsync sourcefile destinationfile` verwenden. Der Inhalt von `sourcefile` wird zum `destinationfile` kopiert.
 
 Eine gute Kombination von optionen ist das folgende:
 
@@ -496,42 +507,46 @@ Das komprimieren von Dateien spart Zeit und Platz bei z.B. der Übertragung übe
 In Linux gibt es folgende Tools, mit denen es möglich ist, files zu komprimieren:
 
 - `gzip` -> Das am häufigsten verwendete in Linux
-
+  
 - `bzip2`-> Komprimiert die Dateien um einiges kleiner als mit **gzip**
-
+  
 - `xz` -> Das effizienteste tool in Linux, wenn man den Platz beachtet
-
+  
 - `zip` -> Wird oft dazu benötigt, um Archives von anderen Betriebssystemen zu untersuchen oder zu de-komprimieren.
+  
 
 Ebenso wird das `tar` Programm häufig verwendet, um Files in einem Archiv zu gruppieren und dann dieses ganze Archiv zu komprimieren.
 
 ### 4.3.1 gzip verwenden
 
 - `gzip *` -> Komprimiert alle Dateien in einem Verzeichnis. Die Dateien werden komprimiert und mit einer **.gz** extension versehen
-
-- `gzip -r projectX` -> Komprimiert alle Dateien und Verzeichnisse in dem projectX-Ordner 
-
+  
+- `gzip -r projectX` -> Komprimiert alle Dateien und Verzeichnisse in dem projectX-Ordner
+  
 - `gunzip foo` -> De-Komprimiert **foo**. Man kann auch einfach `gzip -d` schreiben.
+  
 
 ### 4.3.2 bzip2 verwenden
 
 - `bzip2 *` -> Komprimiert alle Dateien in einem Verzeichnis. Die Dateien werden komprimiert und mit einer **.bz2** extension versehen.
-
+  
 - `bunzip2 *.bz2` -> De-Komprimiert alle Files mit der **.bz2** extension. Man kann auch `bzip2 -d` schreiben.
+  
 
 ### 4.3.3 xz verwenden
 
 `xz` ist das effizeinteste Programm in Linux. Es wird unter anderem auch dazu verwendet, Archive im Linux Kernel zu verstauen. Es ist zwar langsamer aber dafür effizienter.
 
 - `xz *` -> Komprimiert alle Files in einem Verzeichnis. Alle Files werden mit einer **.xz** extension versehen.
-
+  
 - `xz foo` -> Komprimiert foo in **foo.xz** mit dem feault Komprimierungslevel (-6) und entfernt foo.
-
+  
 - `xz -dk bar.xz` -> De-Komprimiert bar.xz in bar. bar.xz wird nicht entfernt.
-
+  
 - `xz -dcf a.txt b.txt.xz > abcd.txt` -> De-Komprimiert ein mix von komprimierten und nicht komprimierten in einen standard output.
-
+  
 - `xd -d *.xz` -> De-Komprimiert alle komprimierten files, welche xz benutzen
+  
 
 ### 4.3.4 zip verwenden
 
@@ -540,24 +555,26 @@ Ebenso wird das `tar` Programm häufig verwendet, um Files in einem Archiv zu gr
 Wenn ein Linux user z.B. ein `.zip` Archiv von einem Windows user bekommt, muss ideser `zip` verwenden. Es ist ein legacy Programm.
 
 - `zip backup *` -> Komprimiert alle Dateien in dem momentanen Verzeichnis und speichert sie in **backup.zip**.
-
+  
 - `zip -r backup.zip ~` -> Archiviert das Home directory (~) und packt alles in backup.zip.
-
+  
 - `unzip backup.zip` -> De-Komprimiert backup.zip und packt es in das momentane Verzeichnis.
+  
 
 ## 5. Archivierung und Komprimierung mit tar
 
-Früher stand `tar` für "**t**ape **a**rchive" und wurde dazu verwendet, Daten auf einem magnetischen Tape zu speichern. Es erlaubt einem, dateien von einem archivierten File zu erstellen oder dieses File zu extrahieren. Die komprimierten Dateien werden oft **tarball** genannt. 
+Früher stand `tar` für "**t**ape **a**rchive" und wurde dazu verwendet, Daten auf einem magnetischen Tape zu speichern. Es erlaubt einem, dateien von einem archivierten File zu erstellen oder dieses File zu extrahieren. Die komprimierten Dateien werden oft **tarball** genannt.
 
 - `tar xvf mydir.tar` -> Extrahiert alle Dateien in mydir.tar in das mydir Verzeichnis.
-
+  
 - `tar zcvf mydir.tar.gz mydir` -> Erstelle ein Archiv und komprimiere es mit **gzip**
-
-- `tar jcvf mydir.tar.bz2 mydir` -> Erstelle ein Archiv und komprimiere es mit **bz2**
-
+  
+- `tar jcvf mydir.tar.bz2 mydir` -> Erstelle ein Archiv und komprimiere es mit **bzip2**
+  
 - `tar Jcvf mydir.tar.xz mydir` -> Erstelle ein Archiv und komprimiere es mit **xz**
-
+  
 - `tar xvf mydir.tar.gz` -> Extrahiere alle Dateien von mydir.tar.gz in mydir.
+  
 
 ## 6. Disk-To-Disk Copying (dd)
 
