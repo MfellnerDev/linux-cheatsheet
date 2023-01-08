@@ -26,7 +26,7 @@ Prozesse können in verschiedene Typen kategoriert werden. Ausschlaggebend ist d
 
 ### 2.1 Interaktive Prozesse
 
-Interaktive Prozesse müssen von einem Benutzer durch Terminal oder Graphische Benutzeroberfläche gestartet werden. 
+Interaktive Prozesse müssen von einem Benutzer durch Terminal oder Graphische Benutzeroberfläche gestartet werden.
 
 **Beispiele:** `Bash`, `Firefox`, `htop`
 
@@ -40,7 +40,7 @@ Batch-Prozesse sind automatische Prozesse, welche im Terminal geplant werden und
 
 Daemons sind Server-Prozesse die kontinuierlich laufen. Viele von diesen Prozessen sind schon ab dem Systemstart aktiv und warten dann auf den Benutzer oder das System, welche den Prozess benötigen.
 
-**Beispiele:** `httpd`, `sshd`, `libvirtd` 
+**Beispiele:** `httpd`, `sshd`, `libvirtd`
 
 ### 2.4 Threads
 
@@ -75,10 +75,11 @@ Neuere PIDs werden normalerweise nach der Reihe vergeben. Also ist der **1. Proz
 Es gibt folgende PID typen:
 
 - `Process ID (PID)` -> <mark>Unique Process ID Nummer</mark>
-
+  
 - `Parent Process ID (PPID)` -> **Der Prozess (Parent), der den Prozess gestartet hat. Wenn der parent stirbt, referenziert die PPID zu einem adoptiv parent (in neueren Kernel ist das kthreadd mit der PPID=2).**
-
+  
 - `Tread ID (TID)` -> **Thread ID Nummer. Diese Nummer ist dasselbe wie PID für single-threaded Prozesse. Für multi-threaded Prozesse ist es so, dass diese Prozesse die gleiche PID besitzen, die unterschiedlichen Threads aber unterschiedliche TIDs haben.**
+  
 
 ### 4.1 Einen Prozess "töten"
 
@@ -101,13 +102,13 @@ $ ps aux | grep htop
 $ kill -9 22907
 ```
 
-Wir haben uns als erstes mit `ps aux` die PID des Prozesses `htop` geholt, und diese dann für den `kill` Befehl verwendet. 
+Wir haben uns als erstes mit `ps aux` die PID des Prozesses `htop` geholt, und diese dann für den `kill` Befehl verwendet.
 
 **!**: Man kann als normaler Benutzer nur seine eigenen Prozesse töten. Die Prozesse eines anderen Benutzers (inkl. root) sind off-limits. Außer, natürlich, man ist root.
 
 ## 5. Benutzer und Gruppen IDs
 
-Vielerlei Benutzer können ein System gleichzeitig bedienen und können ebenso mehrere Prozesse starten. 
+Vielerlei Benutzer können ein System gleichzeitig bedienen und können ebenso mehrere Prozesse starten.
 
 Das Betriebssystem identifiziert den Benutzer, der den Prozess gestartet hat anhand der **Real User ID (RUID)** welche dem Benutzer gegeben wurde.
 
@@ -123,7 +124,7 @@ Jederzeit laufen vielerlei Befehle auf einem System ab (sie befinden sich z.B. i
 
 **Auf jeden Fall gibt es Prozesse, die wichtiger als andere sind.** Also lässt Linux dich Prozessprioritäten auch selbst setzen. Man kann Prozessprioritäten manipulieren. Prozesse mit einer höheren Priorität greifen bevorzugt auf die CPU zu.
 
- Die Priorität eines Prozesses wird anhand seiner **nice value** oder **niceness** festgelegt. Je niedriger die **nice value**, desto höher ist die Priorität des Prozesses. Niedrige Werte werden wichtigen, und höhere Werte unwichtigeren Prozessen zugeordnet. Diese "unwichtigeren" Prozesse können einfach länger warten. Ein Prozess mit einer hohen nice value gibt anderen Prozessen quasi den vortritt.
+Die Priorität eines Prozesses wird anhand seiner **nice value** oder **niceness** festgelegt. Je niedriger die **nice value**, desto höher ist die Priorität des Prozesses. Niedrige Werte werden wichtigen, und höhere Werte unwichtigeren Prozessen zugeordnet. Diese "unwichtigeren" Prozesse können einfach länger warten. Ein Prozess mit einer hohen nice value gibt anderen Prozessen quasi den vortritt.
 
 In Linux, eine nice value von **-20** repräsentiert die höchste, während eine nice value von **+19** die niedrigsten Priorität repräsentiert. Diese konvention stammt aus den jüngsten Tagen von UNIX.
 
@@ -133,33 +134,35 @@ Man kan ebenso eine **real-time priority** vergeben. Diese wird an tasks vergebe
 
 ## 7. Load Averages / Systemauslastung
 
-Die **load averages** (Belastungsdurchschnitt, Systemauslastung) ist der Durchschnitt der load number für einen definierten Zeitpunkt. 
+Die **load averages** (Belastungsdurchschnitt, Systemauslastung) ist der Durchschnitt der load number für einen definierten Zeitpunkt.
 
 Es berücksichtigt folgende Aspekte:
 
 - Prozesse werden aktiv auf der CPU ausgeführt
-
+  
 - Prozesse sind ausführbar, aber warten auf die CPU
-
+  
 - Prozesse sind sleeping, aber warten auf irgendeine ressource (z.B. I/O)
+  
 
 **Note:** Linux ist anders als andere UNIX-Betriebssysteme, da es sleeping Prozesse berücksichtigt. Es inkludiert die sogenannten **uninterruptible** sleepers, diese können nicht einfach aufgeweckt werden.
 
 Die load Average eines Systems kann mittels den Tools `w`, `top` oder `htop` eingesehen werden:
 
-![](/home/manu/.config/marktext/images/2022-12-30-18-51-26-image.png)
+![](file:///home/manu/.config/marktext/images/2022-12-30-18-51-26-image.png?msec=1673142146381)
 
 ### 7.1 Systemauslastung interpretieren
 
-Die Load average wird in meinem Screenshot mittels 3 Nummen repräsentiert (`1.14`, `1.12` und `1.02`). 
+Die Load average wird in meinem Screenshot mittels 3 Nummen repräsentiert (`1.14`, `1.12` und `1.02`).
 
 Wenn man davon ausgeht, dass das System nur eine CPU hat, kann man die Nummern folgendermaßen interpretieren:
 
 - `1.14`: In der letzten Minute war das System durchschnittlich unter einer 114%iger last
-
+  
 - `1.12`: In den letzten 5 Minuten war das System durchschnittlich unter einer 112%iger last
-
+  
 - In den letzten 15 Minuten war das System durchschnittlich unter einer 102%iger Last
+  
 
 Wenn die Werte, so wie bei meinem System, über `1.00` sind, bedeutet das, dass das single CPU-System 100% durchschnittlich ausgelastet war. Das ist gut, wenn man ein System vollkommen auslasten möchte. Ein Wert über `1.00` bedeutet für eine single-CPU, dass das System überlastet war: es gab mehr Prozesse welche die CPU benötigt haben, als die CPU zur Verfügung stand.
 
@@ -201,7 +204,7 @@ So kann man sich z.B. mit `ps -u` alle Prozesse von einem bestimmten Benutzernam
 
 ## 10. Der ps Kommand (BSD Style)
 
-Der `ps` Kommand hat auch noch Darstellungen, die von der BSD Variante von UNIX kommen, wo es nicht üblich ist, stricke und Optionen einfach so hinter einen Befehl zu stellen. 
+Der `ps` Kommand hat auch noch Darstellungen, die von der BSD Variante von UNIX kommen, wo es nicht üblich ist, stricke und Optionen einfach so hinter einen Befehl zu stellen.
 
 Also gibt es hier andere Varianten: mit `ps aux` kann man z.B. alle Prozesse des Systems einsehen, während man mit `ps saxo` dann alle spezifischen Parameter angeben kann.
 
@@ -218,7 +221,7 @@ root           8  0.0  0.0      0     0 ?        I<   Dez29   0:00 [kworker/0:0H
 root          10  0.0  0.0      0     0 ?        I<   Dez29   0:00 [mm_percpu_wq]
 root          12  0.0  0.0      0     0 ?        S    Dez29   0:00 [rcu_tasks_kthre]
 
-$ ps auxo stat,priority,pid,pcpu,comm | head -10
+$ ps saxo stat,priority,pid,pcpu,comm | head -10
 STAT PRI     PID %CPU COMMAND
 Ss    20       1  0.0 systemd
 S     20       2  0.0 kthreadd
@@ -355,10 +358,11 @@ So kann man z.B. tools wie `top` und `htop` verwenden, welche Systeminformatione
 Wenn man den `top` Befehl aufruft steht in der **1. Zeile** eine kurze Zusammenfassung von den Systemereignissen:
 
 - Die Uptime des Systems
-
+  
 - Wie viele Benutzer sind angemeldet
-
+  
 - Die load average
+  
 
 Die load average gibt an, wie beschäftigt ein System ist. Eine load average von `1.00` pro CPU gibt an, dass das System ziemlich beschäftigt, aber nicht überladen ist. Eine load average über `1.00` pro CPU gibt jedoch an, dass Prozesse um CPU-Zeit "kämpfen".
 
@@ -372,9 +376,9 @@ Wenn die load average immer sehr hoch ist, deutet das darauf hin, dass das Syste
 
 ### 12.2 Die zweite Zeile von top
 
-Die **zweite Zeile** vom Output von `top` gibt die Summe der Prozesse sowie die Summe von running,sleepung, stopped und zombie-prozessen an. 
+Die **zweite Zeile** vom Output von `top` gibt die Summe der Prozesse sowie die Summe von running,sleepung, stopped und zombie-prozessen an.
 
-Der Vergleich der running Prozesse mit der load average hilft vielleicht um zu entscheiden, ob das System an seine Grenzen stößt. 
+Der Vergleich der running Prozesse mit der load average hilft vielleicht um zu entscheiden, ob das System an seine Grenzen stößt.
 
 Gestoppte Prozesse sollten untersucht werden, es sollte der Grund für die stoppung gesucht werden.
 
@@ -389,7 +393,7 @@ Tasks: 339 total,   2 running, 337 sleeping,   0 stopped,   0 zombie
 
 Die **dritte Zeile **vom Output von `top` indiziert, wie die CPU zwischen dem **Benutzer** (**us**) und dem **Kernel** (**sy**) aufgeteilt wird. Der Prozentwert of CPU time, die jeder verwendet hat, wird angezeigt.
 
-Was auch noch gelistet ist, sind die **Jobs**, welche mit der **niedrigsten Priorität laufen** (**niceness - ni**). Der **Idle Mode **(**id**) sollte niedrig sein, wenn die load average hoch ist und umgekehrt. 
+Was auch noch gelistet ist, sind die **Jobs**, welche mit der **niedrigsten Priorität laufen** (**niceness - ni**). Der **Idle Mode **(**id**) sollte niedrig sein, wenn die load average hoch ist und umgekehrt.
 
 Der Prozentwert an **Jobs**, die auf **I/O warten** (**wa**) kommt danach. Danach kommen die **interrupts**, wobei man an **hardware** (**hi**) und **software** (**si**) interrupts unterscheidet. **Steal time** (**st**) wird generell mit virtuellen Maschinen verwendet, welche sich an der Idle CPU time bedient.
 
@@ -405,8 +409,9 @@ $ top
 Die **vierte und fünfte Zeile** von `top` zeigen die memomy usage an, welche in folgende Kategorien unterschieden wird:
 
 - Physikalischer Arbeitsspeicher (RAM) - Zeile 4
-
+  
 - Swap Speicher - Zeile5
+  
 
 Um eine gute Systemperformance aufrecht zu erhalten, muss man die Memory usage gut im Auge behalten.
 
@@ -427,40 +432,42 @@ Die Prozessliste von `top` zeigt Informationen zu allen, laufenden Prozessen in 
 Die folgenden Informationen zu den Prozessen werden gegeben:
 
 - Process Identification Number (**PID**)
-
+  
 - Process owner (**USER**)
-
+  
 - Priority (**PR**) and nice values (**NI**)
-
+  
 - Virtual (**VIRT**), physcial (**RES**) und shared memory (**SHR**)
-
+  
 - Status (**S**)
-
+  
 - Prozentwert an CPU (**%CPU**) und memory (**%MEM**) in verwendung
-
+  
 - Ausführungszeit (**TIME+**)
-
+  
 - Command (**COMMAND**)
+  
 
-![](/home/manu/.config/marktext/images/2022-12-30-19-46-51-image.png)
+![](file:///home/manu/.config/marktext/images/2022-12-30-19-46-51-image.png?msec=1673142146405)
 
 ### 12.6 Coole Tasten für Konfiguration von top
 
 Mit den folgenden Tasten kann man coole Sachen machen um `top` noch mehr zu konfigurieren:
 
 - `t` -> <mark>Display or hide summary information (Zeile 2 & 3)</mark>
-
+  
 - `m` -> <mark>Display or hide memory information (Zeile 4 & 5)</mark>
-
+  
 - `A` -> <mark>Sortiere die Liste nach top Ressourcenkonsumenten</mark>
-
+  
 - `r` -><mark> Change priority of specific process</mark>
-
+  
 - `k` -><mark> Kill a specific process</mark>
-
+  
 - `f` -> <mark>Enter `top configuration` screen</mark>
-
+  
 - `o?` -><mark> interactively select a new sort order in the process list</mark>
+  
 
 ## 13. Aufgaben in der Zukunft planen
 
@@ -487,23 +494,24 @@ So haben wir eine Aufgabe geplant, die den Output von ps aux in file1.txt speich
 
 ## 14. cron
 
-`cron` ist ein time-basierendes Planungsprogramm. Es kann routine Hintergrundjobs an bestimmten Zeiten und/oder Tagen ausführen. `cron` wird durch ein Konfigurationsfile in `/etc/crontab` gesteuert (**cron table**), welches vielerlei shell commands enthält, welche wiederrum an bestimmten Zeiten ausgeführt werden müssen. 
+`cron` ist ein time-basierendes Planungsprogramm. Es kann routine Hintergrundjobs an bestimmten Zeiten und/oder Tagen ausführen. `cron` wird durch ein Konfigurationsfile in `/etc/crontab` gesteuert (**cron table**), welches vielerlei shell commands enthält, welche wiederrum an bestimmten Zeiten ausgeführt werden müssen.
 
 Es gibt system-weite **crontab files** und files, welche für bestimmte Benutzer exisiteren. Jede Zeile eines **crontab** files repräsentiert einen job, dieser ist als sogenannte **CRON expression** repräsentiert. Gefolgt wird die CRON expression von einem normalen shell command, der ausgeführt werden soll.
 
 Der Befehl `crontab -e` öffnet einen crontab editor um existierende jobs zu bearbeiten oder neue zu erstellen. Jeder Eintrag eines **crontab** files beinhaltet 6 Felder:
 
 - `MIN` -> <mark>Minutes (0 - 59)</mark>
-
+  
 - `HOUR` -> <mark>Hour Feld (0 - 23)</mark>
-
+  
 - `DOM` -> <mark>Day Of Month (1 - 31)</mark>
-
+  
 - `MON` -> <mark>Month Feld (1 - 12)</mark>
-
+  
 - `DOW` -> <mark>Days Of Week (0 - 6, 0 = Sonntag)</mark>
-
+  
 - `CMD` -> <mark>Command (Der command, der ausgeführt wird)</mark>
+  
 
 **Beispiele:**
 
@@ -517,18 +525,19 @@ Manchmal muss ein job verzögert oder suspendiert werden. Wenn z.B. eine ressour
 
 `sleep` suspendiert die Ausführung für einen definierten Zeitbereich, welcher als Sekunden, Minuten, Stunden oder Tage übergeben werden kann.
 
-Der Syntax lautet: 
+Der Syntax lautet:
 
 `sleep NUMBER[Suffix]`
 
 **SUFFIX kann folgendes sein:**
 
 - **s** für sekunden (by default)
-
+  
 - **m** für minuten
-
+  
 - **h** für stunden
-
+  
 - **d** für Tage
+  
 
 `sleep` und `at` sind unterschiedlich. `Sleep` verzögert die Ausführung für eine spezifische Zeit, während `at` die Ausführung einfach nur zu einem späteren Zeitpunkt startet.
