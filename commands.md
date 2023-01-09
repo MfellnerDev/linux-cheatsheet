@@ -311,4 +311,4 @@ $ set | grep HISTSIZE
 
 ---
 
-
+**eval "$(ssh-agent -s)"**: start ssh agent
