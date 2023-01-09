@@ -1,3 +1,91 @@
+## Tastenkombinationen im Terminal
+
+- `CTRL + L`: Leert den Terminal Bildschirm.
+  
+- `CTRL + D`: Loggt einem aus dem Interface aus.
+  
+- `CTRL + Z`: Snoozed einen Befehl.
+  
+- `CTRL + C`: Bricht einen Befehl ab.
+  
+- `CTRL + H`: Ersetzt die `Backspace` Taste, damit kann man Elemente löschen.
+  
+- `CTRL + A`: Damit kann man zum Anfang der Eingabe gehen.
+  
+- `CTRL + W`: Löscht das letzte Wort vor dem cursor.
+  
+- `CTRL + U`: Löscht die gesamte Zeile in der Shell.
+  
+- `CTRL + E`: Bringt den cursor an das Ende der Zeile.
+
+---
+
+## Berechtigungen in Linux
+7.2 Dateiberechtigungsmodi und chmod
+
+Grundsätzlich setzt Linux für jedes erstellte File/directory permissions, welche für folgende gelten:
+
+- Einen Besitzer
+  
+- Die Gruppenmitglieder
+  
+- Jeder andere
+  
+
+Es gibt drei Permission-typen unter Linux:
+
+- Read (`r`) - `Oktalzahl = 4`
+  
+- Write (`w`) - `Oktalzahl = 2`
+  
+- Execute (`x`) - `Oktalzahl = 1`
+  
+- (minus-zeichen) "`-`" - `Oktalzahl = 0`
+  
+
+Dieses Konzept erlaubt es genau anzugeben, wer die Berechtigungen dazu hat, ein File zu lesen, zu beschreiben und auszuführen.
+
+Wenn man jetzt z.B. einen `ls -l dirname` Befehl ausführt, kann man die Berechtigungen des Ordners sehen:
+
+```shell
+$ ls -l dirname
+drwxr-xr-x 12 linuxize users 4.0K Apr  8 20:51 dirname
+|[-][-][-]    [------] [---]
+| |  |  |        |       |       
+| |  |  |        |       +-----------> Group
+| |  |  |        +-------------------> Owner
+| |  |  +----------------------------> Others Permissions
+| |  +-------------------------------> Group Permissions
+| +----------------------------------> Owner Permissions
++------------------------------------> File Type
+```
+
+Der erste Buchstabe = Typ.
+
+Die nächsten 9 Buchstaben repräsentieren die Berechtigungen für die jeweiligen Gruppen. Sie sind in 3er-Gruppen aufgeteilt.
+
+In diesem Beispiel haben die Gruppen folgende Berechtigungen:
+
+- Besitzer (ersten drei Zeichen): read (r), write (w) & execute (x), `4+2+1 = 7`
+  
+- Gruppe (nächsten drei Zeichen): read (r), execute (x), `4 + 0 + 1 = 5`
+  
+- Jeder andere (nächsten drei Zeichen): read (r), execute (x), `4 + 0 +1 = 5`
+  
+
+Die Oktalzahlen der Berechtigungen ergeben die folgende Ziffer: `755`. So werden die Berechtigungen des Verzeichnisses repräsentiert:
+
+- Besitzer: 4+2+1 = 7
+  
+- Gruppe: 4+0+1 = 5
+  
+- Jeder ander: 4+0+1 = 5
+  
+
+Default-mäßig gibt Linux neu erstellten Dateien die Berechtigung `666` (read, write für alle) und neu erstellten Ordnern die Berechtigung `777` (read, write, execute für alle). Linux erlaubt es nicht, files mit einer execute permission zu erstellen.
+
+---
+
 **cat**: Man kann files damit ausgeben (also sich anzeigen lassen, z.B. "cat notes.txt", lange files sollten gemieden werden
 
 **head**: Damit kann man sich die ersten paar Zeilen einer Datei ausgeben lassen
@@ -176,3 +264,51 @@ Es ist auch möglich, folgendermaßen NFS einzuhängen: **sudo mount servername:
 ---
 
 **dd**: Disk-to-Disk-Copying. Man kann damit raw disk space kopieren. **Vorsicht! Kann Festplatten zerstören!** Z.b.: **dd if=/dev/sda of=/dev/sdb**. Überschreibt und löscht dabei alles, was sich auf der zweiten Festplatte befunden hat.
+
+**useradd / userdel**: Fügt einen Benutzer zum System hinzu / Löscht einen Benutzer vom System (der Benutzer darf für die Löschung nirgendswo anderweitig verwendet werden). -> `/etc/passwd`
+
+**groupdadd / groupdel**: Erstellt eine neue Gruppe im System / löscht eine neue Gruppe im System. -> `/etc/group`
+
+**groups**: Zeigt alle Gruppen an, in denen sich der Benutzer momentan befindet.
+
+**usermod**: Modifiziert einen Benutzer.
+
+**usermod -aG [grpname] [usrname]**: Fügt einen Benutzer zu einer gewissen Gruppe hinzu.
+
+**su**: Switch user. Damit kann man den Benutzer wechseln (auch, falls es wirklich nötig ist, zum root user).
+
+**export VARIABLE=value**: Exportiert eine environment Variable für die momentane session.
+
+---
+**Umgebungsvariablen für die shell history:**
+- `HISTFILE` -> Der Ort, an dem das history file gespeichert wird.
+  
+- `HISTFILESIZE` -> Die maximale Anzahl an Zeilen in dem history file (normalerweise 500).
+  
+- `HISTSIZE` -> Maximale Anzahl an Befehlen im history file.
+  
+- `HISTCONTROL` -> Wie werden Befehle gespeichert
+  
+- `HISTIGNORE` -> Welche Befehle können ignoriert werden
+
+**z.B.:**:
+```shell
+$ set | grep HISTFILE
+
+$ set | grep HISTSIZE
+
+# ...
+```
+
+**chown**: Damit kann man den Besitzer einer Datei / eines Verzeichnisses ändern
+
+**chgrp**: Damit kann man den Besitzer einer Gruppe ändern
+
+**chmod** Damit kann man die Berechtigungen einer Datei / eines Verzeichnisses ändern
+
+
+
+
+---
+
+
