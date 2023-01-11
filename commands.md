@@ -312,3 +312,5 @@ $ set | grep HISTSIZE
 ---
 
 **eval "$(ssh-agent -s)"**: start ssh agent
+
+**[command] 2> /dev/null [option]**: Leitet den stderr output an /dev/null weiter. Er wird also nicht angezeigt.
